@@ -17,28 +17,28 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-1 space-y-0">
-        {/* 2. Hero & Recruiter Quick Scan */}
+        {/* 1. Hero & Impact Metrics Strip */}
         <Hero />
 
-        {/* 3. About & Core Competencies & Education */}
-        <About />
-
-        {/* 4. Experience Case Study */}
-        <Experience />
-
-        {/* 5. Projects & Builds */}
+        {/* 2. Proof of Work: Flagship & Technical Projects */}
         <DataEngineeringProjects />
 
-        {/* 6. Architecture & Lakehouse Capabilities */}
+        {/* 3. Enterprise Case Study: Amgen */}
+        <Experience />
+
+        {/* 4. Architecture & Lakehouse Capabilities */}
         <CapabilitiesArchitecture />
 
-        {/* 7. Technical Skills */}
+        {/* 5. Technical Skills Deep-Dive */}
         <TechnicalSkills />
 
-        {/* 8. Certifications */}
+        {/* 6. Verified Certifications */}
         <Certifications />
 
-        {/* 9. Contact */}
+        {/* 7. About & Academic Profile */}
+        <About />
+
+        {/* 8. Contact & Resume */}
         <Contact />
       </main>
 

@@ -52,23 +52,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) 
 
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
 
-        {/* Default Category Label on Image */}
+        {/* Category & Flagship Badges on Image */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-          <span className="text-[10px] font-mono font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/30">
-            {isFlagship ? <Sparkles className="w-3 h-3 text-amber-400" /> : <Layers className="w-3 h-3 text-emerald-400" />}
+          <span className="text-[10px] font-mono font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/30">
+            <Layers className="w-3 h-3 text-emerald-400" />
             {project.category}
           </span>
         </div>
 
-        {/* Hover Hint Badge (Top Right) */}
-        <div className="absolute top-3 right-3 z-10">
+        {/* Top Right Badges: Flagship & Summary Hint */}
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5">
+          {isFlagship && (
+            <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1 bg-amber-500/20 backdrop-blur-md px-2 py-0.5 rounded-full border border-amber-500/40 shadow-sm">
+              <Sparkles className="w-2.5 h-2.5 text-amber-400" />
+              Flagship
+            </span>
+          )}
           <button
             onClick={() => setShowMobileSummary(!showMobileSummary)}
-            className="flex items-center gap-1 text-[10px] font-mono text-slate-300 bg-slate-950/80 backdrop-blur-md px-2 py-1 rounded-full border border-slate-700 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors"
-            title="Hover or tap for project summary"
+            className="flex items-center gap-1 text-[10px] font-mono text-slate-300 bg-slate-950/85 backdrop-blur-md px-2 py-1 rounded-full border border-slate-700 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors"
+            title="Hover or tap for project architecture summary"
           >
             <Info className="w-3 h-3 text-emerald-400" />
-            <span className="hidden sm:inline">Summary</span>
+            <span className="hidden sm:inline">Overview</span>
           </button>
         </div>
 
