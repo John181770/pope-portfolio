@@ -8,12 +8,8 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 
 export const Experience: React.FC = () => {
-  const [activeVersionKey, setActiveVersionKey] = useState<'versionA' | 'versionB'>(
-    experienceData.activeVersionKey
-  );
   const [isExpanded, setIsExpanded] = useState(true);
-
-  const activeVersion = experienceData.versions[activeVersionKey];
+  const activeVersion = experienceData.versions.versionA;
 
   return (
     <section id="experience" className="py-20 bg-slate-950">
@@ -30,42 +26,13 @@ export const Experience: React.FC = () => {
           </p>
         </div>
 
-        {/* Experience Version Switcher Control */}
-        <div className="flex items-center justify-center gap-3">
-          <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
-            <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
-            Title Switcher:
-          </span>
-          <div className="inline-flex rounded-xl bg-slate-900 p-1 border border-slate-800">
-            <button
-              onClick={() => setActiveVersionKey('versionA')}
-              className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-colors ${
-                activeVersionKey === 'versionA'
-                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Version A: GenAI Analyst Intern
-            </button>
-            <button
-              onClick={() => setActiveVersionKey('versionB')}
-              className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-colors ${
-                activeVersionKey === 'versionB'
-                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Version B: SRE Intern
-            </button>
-          </div>
-        </div>
-
         {/* Main Experience Card */}
         <motion.div
-          key={activeVersionKey}
-          initial={{ opacity: 0, y: 15 }}
+          key="amgen-experience"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-emerald-500/30 shadow-2xl space-y-8"
+          transition={{ duration: 0.4 }}
+          className="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-8"
         >
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-6">

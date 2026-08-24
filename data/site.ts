@@ -10,7 +10,7 @@ export interface SiteConfig {
 export const siteData: SiteConfig = {
   title: "Pope John Paul Kaligithi | Data Engineer",
   description: "Data Engineer focused on Databricks, Apache Spark, PySpark, Python, SQL, dbt, AWS, lakehouse architecture, GenAI applications, and scalable data platforms.",
-  url: "https://popejohnpaul.dev",
+  url: "https://pope-portfolio.vercel.app",
   ogImage: "/og-image.png",
   author: "Pope John Paul Kaligithi",
   keywords: [

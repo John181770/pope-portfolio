@@ -16,7 +16,7 @@ export const certificationsData: Certification[] = [
     issuer: "Oracle University",
     year: "2025",
     category: "cloud",
-    // Configurable credentialId & credentialUrl fields
+    credentialUrl: "https://www.linkedin.com/in/pope-john-paul-kaligithi-450040275/details/certifications/",
   },
   {
     id: "databricks-fundamentals-2026",
@@ -24,6 +24,7 @@ export const certificationsData: Certification[] = [
     issuer: "Databricks Academy",
     year: "2026",
     category: "databricks",
+    credentialUrl: "https://www.linkedin.com/in/pope-john-paul-kaligithi-450040275/details/certifications/",
   },
   {
     id: "dbt-learn-fundamentals",
@@ -31,6 +32,7 @@ export const certificationsData: Certification[] = [
     issuer: "dbt Labs",
     year: "2025",
     category: "analytics",
+    credentialUrl: "https://www.linkedin.com/in/pope-john-paul-kaligithi-450040275/details/certifications/",
   },
   {
     id: "databricks-aibi-2026",
@@ -38,5 +40,6 @@ export const certificationsData: Certification[] = [
     issuer: "Databricks Academy",
     year: "2026",
     category: "databricks",
+    credentialUrl: "https://www.linkedin.com/in/pope-john-paul-kaligithi-450040275/details/certifications/",
   }
 ];
