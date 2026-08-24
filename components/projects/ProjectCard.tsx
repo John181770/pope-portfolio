@@ -39,6 +39,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) 
             src={project.image}
             alt={project.title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={80}
             className={cn(
               "object-cover transition-all duration-500",
               isHovered ? "scale-110 blur-sm opacity-30" : "scale-100 opacity-90"
