@@ -23,12 +23,6 @@ export const Hero: React.FC = () => {
       icon: <Layers className="w-4 h-4 text-cyan-400" />
     },
     {
-      value: "$340k+",
-      label: "Modeled Data",
-      detail: "Star-schema dimensional & DAX analytics",
-      icon: <TrendingUp className="w-4 h-4 text-purple-400" />
-    },
-    {
       value: "4",
       label: "Accreditations",
       detail: "Oracle GenAI, Databricks & dbt certified",
@@ -125,7 +119,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="pt-6"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto text-left">
             {metrics.map((m) => (
               <div
                 key={m.label}
