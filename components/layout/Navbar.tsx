@@ -38,6 +38,24 @@ export const Navbar: React.FC = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    setTimeout(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        const navbarHeight = 80;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth',
+        });
+        window.history.pushState(null, '', href);
+      }
+    }, 120);
+  };
+
   return (
     <header
       className={cn(
@@ -51,6 +69,7 @@ export const Navbar: React.FC = () => {
         {/* Brand Mark */}
         <a
           href="#hero"
+          onClick={(e) => handleNavClick(e, '#hero')}
           className="flex items-center gap-2 font-mono text-base font-bold text-slate-100 group"
         >
           <span className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
@@ -68,7 +87,8 @@ export const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
-              className="hover:text-emerald-400 transition-colors py-1"
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="hover:text-emerald-400 transition-colors py-1 cursor-pointer"
             >
               {link.name}
             </a>
@@ -145,8 +165,8 @@ export const Navbar: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-lg hover:bg-slate-900 hover:text-emerald-400 transition-colors"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="px-3 py-2.5 rounded-lg hover:bg-slate-900 hover:text-emerald-400 active:bg-slate-900 active:text-emerald-400 transition-colors block cursor-pointer"
                 >
                   {link.name}
                 </a>
