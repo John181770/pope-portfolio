@@ -1,9 +1,9 @@
-﻿'use client';
+'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Github, ExternalLink, Layers, Sparkles, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, ExternalLink, Layers, Sparkles, ArrowUpRight, Info, CheckCircle2 } from 'lucide-react';
 import { Project } from '@/data/projects';
 import { Badge } from '@/components/ui/Badge';
 import { cn } from '@/lib/utils';
@@ -14,12 +14,16 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [showMobileSummary, setShowMobileSummary] = useState(false);
   const isFlagship = project.isFlagship;
 
   return (
     <motion.div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -6 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.25 }}
       className={cn(
         "group relative flex flex-col rounded-2xl border transition-all duration-300 overflow-hidden shadow-xl",
         isFlagship
@@ -28,77 +32,116 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) 
         className
       )}
     >
-      {/* Project Image */}
-      {project.image ? (
-        <div className="relative w-full h-44 overflow-hidden">
+      {/* Project Image & Interactive Hover Overlay */}
+      <div className="relative w-full h-48 overflow-hidden bg-slate-950">
+        {project.image ? (
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className={cn(
+              "object-cover transition-all duration-500",
+              isHovered ? "scale-110 blur-sm opacity-30" : "scale-100 opacity-90"
+            )}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent" />
-          {/* Category label overlaid on image */}
-          <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
-            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1 bg-slate-950/70 backdrop-blur-sm px-2 py-0.5 rounded-full border border-emerald-500/30">
-              {isFlagship ? <Sparkles className="w-3 h-3 text-amber-400" /> : <Layers className="w-3 h-3 text-slate-400" />}
-              {project.category}
-            </span>
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 flex items-center justify-center p-6 text-center">
+            <Layers className="w-10 h-10 text-emerald-400/40" />
           </div>
-        </div>
-      ) : (
-        /* Fallback gradient banner when no image */
-        <div className={cn(
-          "w-full h-16 flex items-center justify-between px-5",
-          isFlagship ? "bg-gradient-to-r from-emerald-950/60 to-slate-900" : "bg-slate-800/40"
-        )}>
-          <span className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-            {isFlagship ? <Sparkles className="w-3.5 h-3.5 text-amber-400" /> : <Layers className="w-3.5 h-3.5 text-slate-400" />}
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
+
+        {/* Default Category Label on Image */}
+        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
+          <span className="text-[10px] font-mono font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/30">
+            {isFlagship ? <Sparkles className="w-3 h-3 text-amber-400" /> : <Layers className="w-3 h-3 text-emerald-400" />}
             {project.category}
           </span>
-          {isFlagship && (
-            <Badge variant="primary" size="sm">Flagship</Badge>
-          )}
         </div>
-      )}
 
-      {/* Card Content */}
+        {/* Hover Hint Badge (Top Right) */}
+        <div className="absolute top-3 right-3 z-10">
+          <button
+            onClick={() => setShowMobileSummary(!showMobileSummary)}
+            className="flex items-center gap-1 text-[10px] font-mono text-slate-300 bg-slate-950/80 backdrop-blur-md px-2 py-1 rounded-full border border-slate-700 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors"
+            title="Hover or tap for project summary"
+          >
+            <Info className="w-3 h-3 text-emerald-400" />
+            <span className="hidden sm:inline">Summary</span>
+          </button>
+        </div>
+
+        {/* Slide-In Summary Overlay on Hover */}
+        <AnimatePresence>
+          {(isHovered || showMobileSummary) && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.25 }}
+              className="absolute inset-0 z-20 bg-slate-950/95 backdrop-blur-md p-4 flex flex-col justify-between overflow-y-auto"
+            >
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Project Overview & Architecture</span>
+                </div>
+                <p className="text-xs text-slate-200 leading-relaxed font-sans line-clamp-5">
+                  {project.description}
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-emerald-400">
+                <span>{project.technologies.slice(0, 3).join(' • ')}</span>
+                <span className="text-slate-400 text-[10px]">Click below for repo →</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Card Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        <div>
+        <div className="space-y-2">
           <h3 className="text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors leading-snug">
             {project.title}
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed line-clamp-2">
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-2">
             {project.oneLiner}
           </p>
         </div>
 
-        {/* Tech Stack Chips */}
-        <div className="flex flex-wrap gap-1.5">
+        {/* Tech Stack Badges */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
           {project.technologies.slice(0, 5).map((tech) => (
-            <Badge key={tech} variant="secondary" size="sm">{tech}</Badge>
+            <Badge key={tech} variant="secondary" size="sm">
+              {tech}
+            </Badge>
           ))}
           {project.technologies.length > 5 && (
-            <span className="text-[10px] font-mono text-slate-400 py-0.5 px-1.5">
-              +{project.technologies.length - 5} more
+            <span className="text-[10px] font-mono text-slate-400 py-0.5 px-1.5 bg-slate-800/40 rounded-md border border-slate-700/50">
+              +{project.technologies.length - 5}
             </span>
           )}
         </div>
 
-        {/* Actions */}
+        {/* Actions Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-slate-800/80">
           {project.links.github ? (
             <a
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors group/link"
             >
-              <Github className="w-3.5 h-3.5" />
-              View on GitHub
-              <ArrowUpRight className="w-3 h-3" />
+              <Github className="w-4 h-4" />
+              <span>Inspect on GitHub</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
             </a>
-          ) : <div />}
+          ) : (
+            <div />
+          )}
 
           {project.links.demo && (
             <a
