@@ -26,15 +26,12 @@ export const Navbar: React.FC = () => {
   const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
 
   const navLinks = [
-    { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
-    { name: 'Amgen Experience', href: '#experience' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Architecture', href: '#capabilities' },
     { name: 'Skills', href: '#skills' },
     { name: 'Certifications', href: '#certifications' },
-    { name: 'Education', href: '#education' },
-    { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
 
