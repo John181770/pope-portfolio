@@ -19,6 +19,7 @@ export interface SkillsData {
   capabilities: {
     databricks: CapabilityBreakdown;
     spark: CapabilityBreakdown;
+    dbt: CapabilityBreakdown;
     aws: CapabilityBreakdown;
     devops: CapabilityBreakdown;
   };
@@ -100,6 +101,21 @@ export const skillsData: SkillsData = {
         "Spark Memory & Cluster Tuning"
       ],
       handsOnLevel: "Hands-on implementation supported by Formula 1 and Streaming projects."
+    },
+    dbt: {
+      title: "dbt Analytics Engineering & Modeling",
+      description: "Modern modular SQL transformations, Jinja templating, materializations, schema testing, and lineage DAG management.",
+      capabilities: [
+        "Modular Model Layering (Staging stg_, Intermediate int_, Marts fct_/dim_)",
+        "Jinja Templating (ref(), source(), config() macros)",
+        "Materializations (views, tables, incremental, ephemeral)",
+        "Automated Schema Tests (unique, not_null, accepted_values, relationships)",
+        "Custom Singular SQL Assertions & Data Quality",
+        "dbt CLI Workflows (dbt run, test, seed, compile, docs generate)",
+        "DAG Lineage Visualization & Auto-Documentation",
+        "dbt Project Structure (dbt_project.yml, sources.yml)"
+      ],
+      handsOnLevel: "Hands-on analytics engineering implementation and group training build."
     },
     aws: {
       title: "AWS Cloud Infrastructure",

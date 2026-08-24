@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Database, Cloud, ShieldCheck, Sparkles, Terminal, CheckCircle2 } from 'lucide-react';
+import { Cpu, Database, Cloud, ShieldCheck, Sparkles, Terminal, CheckCircle2, Layers } from 'lucide-react';
 import { skillsData } from '@/data/skills';
 import { Badge } from '@/components/ui/Badge';
 import { Tabs, TabItem } from '@/components/ui/Tabs';
@@ -13,6 +13,7 @@ export const TechnicalSkills: React.FC = () => {
   const tabs: TabItem[] = [
     { id: 'databricks', label: 'Databricks Deep-Dive', icon: <Database className="w-3.5 h-3.5" /> },
     { id: 'spark', label: 'Apache Spark / PySpark', icon: <Cpu className="w-3.5 h-3.5" /> },
+    { id: 'dbt', label: 'dbt Analytics Engineering', icon: <Layers className="w-3.5 h-3.5" /> },
     { id: 'aws', label: 'AWS Infrastructure', icon: <Cloud className="w-3.5 h-3.5" /> },
     { id: 'devops', label: 'DevOps & Workflows', icon: <ShieldCheck className="w-3.5 h-3.5" /> },
   ];
